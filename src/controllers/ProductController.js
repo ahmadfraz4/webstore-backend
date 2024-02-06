@@ -60,7 +60,7 @@ let createProduct = async (req, res, next) => {
     // console.log(req.files.images)
     if (productImagesPath && productImagesPath.length > 0) {
       const uploadPromises = productImagesPath.map(async (item) => {
-        let productImage = await cloudinary(item.path, 'Webstore/products');
+        let productImage = await cloudinary(item.buffer, 'Webstore/products');
         return {
           public_id: productImage.public_id,
           url: productImage.url
@@ -110,7 +110,7 @@ let updateProduct = async (req, res, next) => {
     if (!getProduct) {
       return next(new ErrorHandler("product not found", 404));
     }
-    console.log(req.files)
+    // console.log(req.files)
     let newBody = {
       name, description, stock, price, images:[], category
     }
@@ -119,7 +119,7 @@ let updateProduct = async (req, res, next) => {
 
     if (images && images.length > 0) {
       const uploadPromises = images.map(async (item) => {
-        let productImage = await cloudinary(item.path, 'Webstore/products');
+        let productImage = await cloudinary(item.buffer, 'Webstore/products');
         return {
           public_id: productImage.public_id,
           url: productImage.url

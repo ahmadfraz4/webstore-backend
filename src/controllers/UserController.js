@@ -173,7 +173,7 @@ let updateUser = AsyncErrorHandler(async (req,res, next)=>{
     if(req.user._id.toString() !== user._id.toString()){
         return next(new ErrorHandler('Unauthorized user', 401))
     }
-    let avatarPath = req.files.avatar && req.files.avatar[0] && req.files.avatar[0].path;
+    let avatarPath = req.files.avatar && req.files.avatar[0] && req.files.avatar[0].buffer;
     // let avatar;
     
     let avatar;

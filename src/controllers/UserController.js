@@ -8,19 +8,33 @@ let crypto = require('crypto')
 const { cloudinary, destroyCloudinaryImage } = require('../utills/cloudinary')
 let createUser = AsyncErrorHandler(async (req,res,next) =>{
     let {name, email , password} = req.body;
-    let avatarPath = req.files.avatar && req.files.avatar[0] && req.files.avatar[0]?.path;
+    // let avatarPath = req.files.avatar && req.files.avatar[0] && req.files.avatar[0].buffer;
+    // // let avatar;
     // let avatar;
-    let avatar;
-    if(avatarPath){
-        avatar = await cloudinary(avatarPath, 'Webstore/users');
-    }
-    if(avatar && avatar != null && avatar != undefined && avatar.url != null && avatar.url != undefined ){
-        avatar = {
-            public_id : avatar.public_id,
-            url :  avatar.url
+    // if(avatarPath){
+    //     avatar = await cloudinary(avatarPath, 'Webstore/users');
+    // }
+    // if(avatar && avatar != null && avatar != undefined && avatar.url != null && avatar.url != undefined ){
+    //     avatar = {
+    //         public_id : avatar.public_id,
+    //         url :  avatar.url
+    //     }
+    // }else{
+    //     avatar = {}
+    // }
+    console.log(req.files.avatar[0].buffer)
+    if (req.files && req.files.avatar[0]){
+        let uploadResult = await cloudinary(req.files.avatar[0].buffer, 'Webstore/users');
+        if (uploadResult && uploadResult.url) {
+            avatar = {
+                public_id: uploadResult.public_id,
+                url: uploadResult.url
+            };
+        } else {
+            avatar = {};
         }
-    }else{
-        avatar = {}
+    } else {
+        avatar = {};
     }
     const user =await userModel.create({name, email, password, avatar});
     
@@ -159,7 +173,7 @@ let updateUser = AsyncErrorHandler(async (req,res, next)=>{
     if(req.user._id.toString() !== user._id.toString()){
         return next(new ErrorHandler('Unauthorized user', 401))
     }
-    let avatarPath = req.files.avatar && req.files.avatar[0] && req.files.avatar[0]?.path;
+    let avatarPath = req.files.avatar && req.files.avatar[0] && req.files.avatar[0].path;
     // let avatar;
     
     let avatar;

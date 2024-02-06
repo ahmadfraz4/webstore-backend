@@ -112,9 +112,6 @@ let forgotPassword = AsyncErrorHandler(async (req, res, next) => {
         let resetToken = await user.forgetPasswordToken(); // it will guve a token to reset password
         // user.resetPasswordToken = resetToken; // this will store into database after token generation
         // user.resetPasswordExpire = Date.now() + 30 * 60 * 1000; // expire the random otp 30 minutes
-
-        // await user.save({ validateBeforeSave: false });
-
         // let resetPasswordUrl = `${req.protocol || 'http'}://${req.get("host")}/api/v1/password/reset/${resetToken}`; --todo before deploy
         let resetPasswordUrl = `${req.protocol || 'http'}://${req.get("host")}/resetPassword/${resetToken}`;
         let message = `Your password reset token :- \n\n ${resetPasswordUrl}`;

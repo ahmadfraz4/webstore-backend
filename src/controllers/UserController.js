@@ -116,7 +116,7 @@ let forgotPassword = AsyncErrorHandler(async (req, res, next) => {
         // await user.save({ validateBeforeSave: false });
 
         // let resetPasswordUrl = `${req.protocol || 'http'}://${req.get("host")}/api/v1/password/reset/${resetToken}`; --todo before deploy
-        let resetPasswordUrl = `${req.protocol || 'http'}://${process.env.FRONTEND_PATH}/resetPassword/${resetToken}`;
+        let resetPasswordUrl = `${req.protocol || 'http'}://${req.get("host")}/resetPassword/${resetToken}`;
         let message = `Your password reset token :- \n\n ${resetPasswordUrl}`;
 
         

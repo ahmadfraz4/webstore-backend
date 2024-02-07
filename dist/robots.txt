@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap:https://webstore-2024.up.railway.app/sitemap.xml

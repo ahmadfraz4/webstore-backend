@@ -30,9 +30,21 @@ app.use("/api/v1",require("./src/routers/OrderRouter"));
 app.use('/api/v1', require('./src/routers/payment.router'))
 
 
+
+
 app.use(express.static(path.join(__dirname, '/dist')));
 
+app.get('*/robots.txt', (req, res) => {
+  res.sendFile(path.join(__dirname , '/dist/robots.txt'));
+});
+app.get('*/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(__dirname , '/dist/sitemap.xml'));
+});
+
 app.get('*', (req, res) => {
+  if(req.path == 'robots.txt'){
+   return res.sendFile(path.join(__dirname , '/dist/robots.txt'));
+  }
   res.sendFile(path.join(__dirname, '/dist', 'index.html'));
 });
 

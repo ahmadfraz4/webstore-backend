@@ -1,8 +1,8 @@
 require('dotenv').config()
 let mongoose = require('mongoose')
-
-let mongoURI = process.env.MONGO_URI
-mongoose.connect(mongoURI).then(r=>console.log('connected to db'))
+// process.env.MONGO_URI
+// let mongoURI = 'mongodb://127.0.0.1:27017/ECommerce'
+mongoose.connect(process.env.MONGO_URI).then(r=>console.log('connected to db'))
 
 
 // for serverless..

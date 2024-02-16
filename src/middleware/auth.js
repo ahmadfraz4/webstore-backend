@@ -8,7 +8,7 @@ let auth = AsyncErrorHandler(async(req,res,next)=>{
     let {token} = req.cookies;
    
     if(!token){
-        return next(new ErrorHandler('Please login to access products', 401))
+        return next(new ErrorHandler('Please login to access resource', 401))
     }
     let decodeData = jwt.verify(token, process.env.JWT_SECRETKEY)
     

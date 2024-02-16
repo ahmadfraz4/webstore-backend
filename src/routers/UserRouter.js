@@ -1,5 +1,5 @@
 let express = require('express');
-const { createUser, loginUser,logoutUser, forgotPassword, resetPassword, getUserDetails,updatePassword, updateUser, AllUsers, deleteUser} = require('../controllers/UserController');
+const { createUser, loginUser,logoutUser, forgotPassword, resetPassword, getUserDetails,updatePassword, updateUser, AllUsers, deleteUser, UserMsg} = require('../controllers/UserController');
 const {auth, authorizeRole} = require('../middleware/auth');
 let {upload} = require('../middleware/multer.upload')
 let router = express.Router();

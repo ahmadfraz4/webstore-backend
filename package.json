@@ -25,10 +25,13 @@
     "mongoose": "^8.0.3",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.7",
+    "socket.io": "^4.7.4",
     "streamifier": "^0.1.1",
     "stripe": "^14.14.0",
+    "twilio": "^4.22.0",
     "validator": "^13.11.0"
-  },"engines": {
+  },
+  "engines": {
     "node": "16.x"
   }
 }

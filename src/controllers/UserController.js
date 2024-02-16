@@ -6,6 +6,7 @@ const HandleToken = require('../utills/HandleToken')
 let { sendingEmail} = require('../utills/sendEmail')
 let crypto = require('crypto')
 const { cloudinary, destroyCloudinaryImage } = require('../utills/cloudinary')
+const { sendChat } = require('../utills/Messaging')
 let createUser = AsyncErrorHandler(async (req,res,next) =>{
     let {name, email , password} = req.body;
     // let avatarPath = req.files.avatar && req.files.avatar[0] && req.files.avatar[0].buffer;
@@ -261,4 +262,18 @@ let AllUsers = async (req,res) => {
     }
 }
 
-module.exports = { createUser,AllUsers,deleteUser, loginUser,logoutUser,forgotPassword,resetPassword,getUserDetails, updatePassword, updateUser}
+
+let UserMsg = async (req,res) => {
+    try {
+        let {number, textMsg} = req.body;
+        // console.log(number)    
+        await sendChat(number, textMsg);
+        res.json({
+            success:true, message : 'message send successfully'
+        })
+    } catch (error) {
+        res.json({success:false, error})
+    }
+}
+
+module.exports = { UserMsg, createUser,AllUsers,deleteUser, loginUser,logoutUser,forgotPassword,resetPassword,getUserDetails, updatePassword, updateUser}
